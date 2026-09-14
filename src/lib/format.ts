@@ -1,4 +1,5 @@
 import type { Locale } from "./i18n/types";
+import { getCurrencyMeta } from "./currencies";
 
 // Force the Gregorian calendar + Latin digits for Arabic: ar-SA defaults to the
 // Hijri calendar and Arabic-Indic digits in ICU, which would show confusing
@@ -9,14 +10,15 @@ const INTL_LOCALE: Record<Locale, string> = {
 };
 
 export function formatMoney(amount: number, currency: string, locale: Locale): string {
+  const meta = getCurrencyMeta(currency);
   const formatted = new Intl.NumberFormat(INTL_LOCALE[locale], {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: meta.decimals,
+    maximumFractionDigits: meta.decimals,
   }).format(amount);
-  // Currency code before the amount in both locales — keeps the two LTR runs
-  // (code, digits) in one predictable order instead of relying on bidi
-  // reordering to place a trailing code "naturally" in an RTL sentence.
-  return currency ? `${currency} ${formatted}` : formatted;
+  // Symbol before the amount in both locales — keeps the two LTR runs
+  // (symbol, digits) in one predictable order instead of relying on bidi
+  // reordering to place a trailing symbol "naturally" in an RTL sentence.
+  return currency ? `${meta[locale]} ${formatted}` : formatted;
 }
 
 export function formatNumber(value: number, locale: Locale): string {
