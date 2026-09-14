@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #faf7f2;
+  --surface: #ffffff;
+  --surface-2: #f4ede3;
+  --border: #e9ded0;
+  --text: #241c14;
+  --text-muted: #7a6c5a;
+
+  --primary: #e8622c;
+  --primary-hover: #d5501e;
+  --primary-foreground: #fff8f2;
+  --accent: #0f766e;
+  --accent-foreground: #f0fdfa;
+
+  --success: #16a34a;
+  --success-foreground: #f0fdf4;
+  --warning: #d97706;
+  --warning-foreground: #fffbeb;
+  --danger: #dc2626;
+  --danger-foreground: #fef2f2;
+
+  --ring: #e8622c;
+
+  --shadow-color: 24 20% 40%;
+}
+
+.dark {
+  --background: #171310;
+  --surface: #221c16;
+  --surface-2: #2b241c;
+  --border: #3a3126;
+  --text: #f3ece1;
+  --text-muted: #af9f8b;
+
+  --primary: #f2814a;
+  --primary-hover: #ff9862;
+  --primary-foreground: #201207;
+  --accent: #2dd4bf;
+  --accent-foreground: #072220;
+
+  --success: #4ade80;
+  --success-foreground: #052e13;
+  --warning: #fbbf24;
+  --warning-foreground: #2b1a02;
+  --danger: #f87171;
+  --danger-foreground: #2b0b0b;
+
+  --ring: #f2814a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-cairo);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 9999px;
+  }
+
+  .brand-gradient {
+    background-image: linear-gradient(135deg, var(--color-primary), #f2a154 130%);
+  }
+
+  .card-shadow {
+    box-shadow: 0 1px 2px hsl(var(--shadow-color) / 0.06), 0 8px 24px -12px hsl(var(--shadow-color) / 0.18);
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
