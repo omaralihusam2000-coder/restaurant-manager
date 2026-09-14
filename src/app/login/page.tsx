@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getLocale, getTheme } from "@/lib/preferences";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { LoginForm } from "./login-form";
@@ -45,6 +46,13 @@ export default async function LoginPage() {
           <p className="mt-1 text-sm text-text-muted sm:hidden">{dict.login.subtitle}</p>
 
           <LoginForm dict={dict} />
+
+          <p className="mt-4 text-center text-sm text-text-muted">
+            {dict.login.noAccount}{" "}
+            <Link href="/signup" className="font-semibold text-primary hover:underline">
+              {dict.login.signupLink}
+            </Link>
+          </p>
 
           <div className="mt-6 rounded-xl bg-surface-2 p-3">
             <p className="text-xs font-semibold text-text-muted">{dict.login.demoAccounts}</p>
