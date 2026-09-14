@@ -57,8 +57,8 @@ model Restaurant {
   id          String   @id @default(cuid())
   name        String
   logoEmoji   String   @default("🍽️")
-  currency    String   @default("SAR")
-  taxRate     Float    @default(15)
+  currency    String   @default("IQD")
+  taxRate     Float    @default(0)
   address     String?
   phone       String?
   createdAt   DateTime @default(now())

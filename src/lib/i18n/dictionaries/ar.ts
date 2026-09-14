@@ -66,7 +66,7 @@ const ar = {
     ownerName: "اسمك",
     email: "البريد الإلكتروني",
     password: "كلمة المرور",
-    currency: "العملة",
+    currencyNote: "جميع الأسعار بالدينار العراقي (IQD).",
     submit: "إنشاء الحساب",
     submitting: "جارٍ الإنشاء...",
     emailTaken: "هذا البريد الإلكتروني مستخدم بالفعل",

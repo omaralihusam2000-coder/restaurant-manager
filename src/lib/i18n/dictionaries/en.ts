@@ -68,7 +68,7 @@ const en = {
     ownerName: "Your name",
     email: "Email",
     password: "Password",
-    currency: "Currency",
+    currencyNote: "All prices are shown in Iraqi Dinar (IQD).",
     submit: "Create account",
     submitting: "Creating...",
     emailTaken: "This email is already in use",

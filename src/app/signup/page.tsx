@@ -34,7 +34,7 @@ export default async function SignupPage() {
           <h2 className="text-xl font-bold">{dict.signup.title}</h2>
           <p className="mt-1 text-sm text-text-muted sm:hidden">{dict.signup.subtitle}</p>
 
-          <SignupForm dict={dict} locale={locale} />
+          <SignupForm dict={dict} />
 
           <p className="mt-4 text-center text-sm text-text-muted">
             {dict.signup.haveAccount}{" "}

@@ -12,6 +12,7 @@ async function main() {
   console.log("🌱 Seeding database...");
 
   // Clean slate for repeatable seeding in dev.
+  await db.shift.deleteMany();
   await db.payment.deleteMany();
   await db.orderItemModifier.deleteMany();
   await db.orderItem.deleteMany();
@@ -30,10 +31,10 @@ async function main() {
     data: {
       name: "مطعم لمّة",
       logoEmoji: "🍽️",
-      currency: "SAR",
-      taxRate: 15,
-      address: "شارع الملك فهد، الرياض",
-      phone: "0500000000",
+      currency: "IQD",
+      taxRate: 0,
+      address: "شارع الرشيد، بغداد",
+      phone: "07901234567",
     },
   });
 
@@ -98,8 +99,8 @@ async function main() {
       modifiers: {
         create: [
           { nameAr: "صغير", nameEn: "Small", priceDelta: 0 },
-          { nameAr: "وسط", nameEn: "Medium", priceDelta: 5 },
-          { nameAr: "كبير", nameEn: "Large", priceDelta: 10 },
+          { nameAr: "وسط", nameEn: "Medium", priceDelta: 1000 },
+          { nameAr: "كبير", nameEn: "Large", priceDelta: 2000 },
         ],
       },
     },
@@ -114,8 +115,8 @@ async function main() {
       restaurantId: restaurant.id,
       modifiers: {
         create: [
-          { nameAr: "جبنة إضافية", nameEn: "Extra Cheese", priceDelta: 4 },
-          { nameAr: "صوص حار", nameEn: "Spicy Sauce", priceDelta: 2 },
+          { nameAr: "جبنة إضافية", nameEn: "Extra Cheese", priceDelta: 1500 },
+          { nameAr: "صوص حار", nameEn: "Spicy Sauce", priceDelta: 500 },
           { nameAr: "بدون بصل", nameEn: "No Onion", priceDelta: 0 },
         ],
       },
@@ -131,27 +132,27 @@ async function main() {
     category: string;
     modifierGroups?: string[];
   }[] = [
-    { nameAr: "حمص", nameEn: "Hummus", price: 18, cost: 6, emoji: "🥙", category: "Appetizers" },
-    { nameAr: "متبل", nameEn: "Mutabbal", price: 18, cost: 6, emoji: "🍆", category: "Appetizers" },
-    { nameAr: "سلطة فتوش", nameEn: "Fattoush Salad", price: 22, cost: 7, emoji: "🥗", category: "Appetizers" },
-    { nameAr: "بطاطس مقلية", nameEn: "French Fries", price: 14, cost: 4, emoji: "🍟", category: "Appetizers", modifierGroups: ["Size"] },
-    { nameAr: "كبسة دجاج", nameEn: "Chicken Kabsa", price: 42, cost: 18, emoji: "🍛", category: "Main Dishes" },
-    { nameAr: "مندي لحم", nameEn: "Lamb Mandi", price: 58, cost: 26, emoji: "🍖", category: "Main Dishes" },
-    { nameAr: "برياني دجاج", nameEn: "Chicken Biryani", price: 38, cost: 16, emoji: "🍚", category: "Main Dishes" },
-    { nameAr: "برجر لحم", nameEn: "Beef Burger", price: 32, cost: 14, emoji: "🍔", category: "Main Dishes", modifierGroups: ["Size", "Extras"] },
-    { nameAr: "بيتزا خضار", nameEn: "Veggie Pizza", price: 36, cost: 15, emoji: "🍕", category: "Main Dishes", modifierGroups: ["Size", "Extras"] },
-    { nameAr: "شيش طاووق", nameEn: "Shish Tawook", price: 36, cost: 15, emoji: "🍢", category: "Grills" },
-    { nameAr: "كباب لحم", nameEn: "Kebab", price: 44, cost: 20, emoji: "🍢", category: "Grills" },
-    { nameAr: "ريش غنم", nameEn: "Lamb Chops", price: 68, cost: 32, emoji: "🍖", category: "Grills" },
-    { nameAr: "دجاج مشوي", nameEn: "Grilled Chicken", price: 40, cost: 17, emoji: "🍗", category: "Grills" },
-    { nameAr: "عصير برتقال", nameEn: "Orange Juice", price: 12, cost: 3, emoji: "🍊", category: "Drinks" },
-    { nameAr: "ليموناضة نعناع", nameEn: "Mint Lemonade", price: 14, cost: 3, emoji: "🍋", category: "Drinks" },
-    { nameAr: "شاي أحمر", nameEn: "Black Tea", price: 8, cost: 1, emoji: "🍵", category: "Drinks" },
-    { nameAr: "قهوة عربية", nameEn: "Arabic Coffee", price: 10, cost: 2, emoji: "☕", category: "Drinks" },
-    { nameAr: "مشروب غازي", nameEn: "Soft Drink", price: 8, cost: 2, emoji: "🥤", category: "Drinks" },
-    { nameAr: "كنافة", nameEn: "Kunafa", price: 22, cost: 8, emoji: "🍰", category: "Desserts" },
-    { nameAr: "أم علي", nameEn: "Om Ali", price: 20, cost: 7, emoji: "🍮", category: "Desserts" },
-    { nameAr: "بسبوسة", nameEn: "Basbousa", price: 16, cost: 5, emoji: "🧁", category: "Desserts" },
+    { nameAr: "حمص", nameEn: "Hummus", price: 4000, cost: 1500, emoji: "🥙", category: "Appetizers" },
+    { nameAr: "متبل", nameEn: "Mutabbal", price: 4000, cost: 1500, emoji: "🍆", category: "Appetizers" },
+    { nameAr: "سلطة فتوش", nameEn: "Fattoush Salad", price: 5000, cost: 2000, emoji: "🥗", category: "Appetizers" },
+    { nameAr: "بطاطس مقلية", nameEn: "French Fries", price: 3000, cost: 1000, emoji: "🍟", category: "Appetizers", modifierGroups: ["Size"] },
+    { nameAr: "كبسة دجاج", nameEn: "Chicken Kabsa", price: 12000, cost: 5000, emoji: "🍛", category: "Main Dishes" },
+    { nameAr: "مندي لحم", nameEn: "Lamb Mandi", price: 20000, cost: 9000, emoji: "🍖", category: "Main Dishes" },
+    { nameAr: "برياني دجاج", nameEn: "Chicken Biryani", price: 10000, cost: 4000, emoji: "🍚", category: "Main Dishes" },
+    { nameAr: "برجر لحم", nameEn: "Beef Burger", price: 8000, cost: 3500, emoji: "🍔", category: "Main Dishes", modifierGroups: ["Size", "Extras"] },
+    { nameAr: "بيتزا خضار", nameEn: "Veggie Pizza", price: 9000, cost: 3500, emoji: "🍕", category: "Main Dishes", modifierGroups: ["Size", "Extras"] },
+    { nameAr: "شيش طاووق", nameEn: "Shish Tawook", price: 9000, cost: 3500, emoji: "🍢", category: "Grills" },
+    { nameAr: "كباب لحم", nameEn: "Kebab", price: 11000, cost: 5000, emoji: "🍢", category: "Grills" },
+    { nameAr: "ريش غنم", nameEn: "Lamb Chops", price: 18000, cost: 8000, emoji: "🍖", category: "Grills" },
+    { nameAr: "دجاج مشوي", nameEn: "Grilled Chicken", price: 10000, cost: 4200, emoji: "🍗", category: "Grills" },
+    { nameAr: "عصير برتقال", nameEn: "Orange Juice", price: 2000, cost: 500, emoji: "🍊", category: "Drinks" },
+    { nameAr: "ليموناضة نعناع", nameEn: "Mint Lemonade", price: 2500, cost: 600, emoji: "🍋", category: "Drinks" },
+    { nameAr: "شاي أحمر", nameEn: "Black Tea", price: 1000, cost: 200, emoji: "🍵", category: "Drinks" },
+    { nameAr: "قهوة عربية", nameEn: "Arabic Coffee", price: 1500, cost: 400, emoji: "☕", category: "Drinks" },
+    { nameAr: "مشروب غازي", nameEn: "Soft Drink", price: 1000, cost: 400, emoji: "🥤", category: "Drinks" },
+    { nameAr: "كنافة", nameEn: "Kunafa", price: 5000, cost: 2000, emoji: "🍰", category: "Desserts" },
+    { nameAr: "أم علي", nameEn: "Om Ali", price: 4500, cost: 1800, emoji: "🍮", category: "Desserts" },
+    { nameAr: "بسبوسة", nameEn: "Basbousa", price: 3500, cost: 1200, emoji: "🧁", category: "Desserts" },
   ];
 
   const modifierGroupsMap: Record<string, string> = {

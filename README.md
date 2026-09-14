@@ -1,16 +1,19 @@
-# 🍽️ لمّة — نظام كاشير المطاعم
+# 🍽️ لمّة — نظام كاشير المطاعم العراقية
 
-نظام **كاشير (POS) سهل الاستخدام ومتطور** مصمم خصيصًا للمطاعم: نقطة بيع سريعة،
-خريطة طاولات مباشرة، شاشة مطبخ (KDS)، إدارة قائمة الطعام، تقارير مبيعات
-لحظية، وإدارة مستخدمين وصلاحيات — كل ذلك بواجهة عربية/إنجليزية (RTL/LTR)
-مميزة، متجاوبة بالكامل مع كل المقاسات، وقابلة للتوسّع لاحقًا لتصبح **منتج
-SaaS** يُشترك فيه عدة مطاعم.
+نظام **كاشير (POS) سهل الاستخدام ومتطور** مصمم خصيصًا **للمطاعم العراقية**:
+كل الأسعار بالدينار العراقي (IQD) من أول يوم، نقطة بيع سريعة، خريطة طاولات
+مباشرة، شاشة مطبخ (KDS)، إدارة قائمة الطعام، تقارير مبيعات لحظية، ووردية
+كاشير بمطابقة نقدية — كل ذلك بواجهة عربية/إنجليزية (RTL/LTR) مميزة، متجاوبة
+بالكامل، وأي مطعم يقدر يسجّل نفسه ويبدأ البيع خلال دقائق (`/signup`)، وقابلة
+للتوسّع لاحقًا لتصبح **منتج SaaS** يُشترك فيه عدة مطاعم.
 
-> An easy, advanced, and genuinely useful restaurant POS system — cashier,
-> live table map, kitchen display, menu management, real-time sales
-> dashboard, and role-based staff accounts, in a bilingual (Arabic/English,
-> RTL/LTR) responsive UI, architected so it can grow into a multi-tenant
-> SaaS product down the line.
+> An easy, advanced, and genuinely useful restaurant POS system built for
+> **Iraqi restaurants** — prices in Iraqi Dinar (IQD) from day one, plus
+> cashier, live table map, kitchen display, menu management, real-time sales
+> dashboard, cash-drawer shift reconciliation, and role-based staff
+> accounts, in a bilingual (Arabic/English, RTL/LTR) responsive UI. Any
+> restaurant can sign itself up and start selling in minutes, and it's
+> architected so it can grow into a multi-tenant SaaS product down the line.
 
 <p align="center">
   <img src="docs/screenshots/login.png" width="49%" alt="Login screen" />
@@ -21,8 +24,11 @@ SaaS** يُشترك فيه عدة مطاعم.
   <img src="docs/screenshots/dashboard-dark-en.png" width="49%" alt="Dashboard in dark mode / English" />
 </p>
 <p align="center">
-  <img src="docs/screenshots/pos-mobile.png" width="30%" alt="POS on mobile" />
+  <img src="docs/screenshots/signup.png" width="49%" alt="Restaurant signup page" />
   <img src="docs/screenshots/shift-close.png" width="49%" alt="Closing a cash shift with automatic over/short detection" />
+</p>
+<p align="center">
+  <img src="docs/screenshots/pos-mobile.png" width="30%" alt="POS on mobile" />
 </p>
 
 ## ✨ Features
@@ -122,9 +128,10 @@ production build.
 This isn't just the demo data — anyone can create their own restaurant:
 
 1. **`/signup`** — a restaurant owner enters their restaurant's name, their
-   own name, an email, a password, and picks a currency. That one submission
-   creates a `Restaurant` row, an `OWNER` `User` under it, six starter tables
-   so the floor plan isn't empty, and signs them straight in.
+   own name, an email, and a password. That one submission creates a
+   `Restaurant` row (currency defaults to IQD, tax rate to 0%), an `OWNER`
+   `User` under it, six starter tables so the floor plan isn't empty, and
+   signs them straight in.
 2. They land on **`/menu`** and add their own dishes and prices (deliberately
    *not* pre-filled with sample food — a real restaurant's menu should be
    theirs).

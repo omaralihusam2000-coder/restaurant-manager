@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { createSessionCookie, clearSessionCookie } from "@/lib/auth";
 import { getLocale } from "@/lib/preferences";
-import { SIGNUP_CURRENCIES } from "@/lib/currencies";
 import type { Role } from "@/generated/prisma/enums";
 
 const loginSchema = z.object({
@@ -65,7 +64,6 @@ const signupSchema = z.object({
   ownerName: z.string().min(1).max(120),
   email: z.email(),
   password: z.string().min(6).max(100),
-  currency: z.enum(SIGNUP_CURRENCIES),
 });
 
 export type SignupState = { error?: string };
@@ -76,7 +74,6 @@ export async function signupAction(_prevState: SignupState, formData: FormData):
     ownerName: formData.get("ownerName"),
     email: formData.get("email"),
     password: formData.get("password"),
-    currency: formData.get("currency"),
   });
   if (!parsed.success) {
     return { error: "invalid" };
@@ -96,7 +93,7 @@ export async function signupAction(_prevState: SignupState, formData: FormData):
     const restaurant = await tx.restaurant.create({
       data: {
         name: parsed.data.restaurantName,
-        currency: parsed.data.currency,
+        currency: "IQD",
       },
     });
 
