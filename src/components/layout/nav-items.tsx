@@ -7,6 +7,7 @@ import {
   LineChart,
   Boxes,
   Settings,
+  Wallet,
 } from "lucide-react";
 import type { Role } from "@/generated/prisma/enums";
 import type { Dictionary } from "@/lib/i18n/types";
@@ -23,6 +24,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/tables", labelKey: "tables", icon: LayoutGrid, roles: ["OWNER", "MANAGER", "CASHIER", "WAITER"] },
   { href: "/kitchen", labelKey: "kitchen", icon: ChefHat, roles: ["OWNER", "MANAGER", "KITCHEN"] },
   { href: "/orders", labelKey: "orders", icon: ClipboardList, roles: ["OWNER", "MANAGER", "CASHIER", "WAITER"] },
+  { href: "/shifts", labelKey: "shifts", icon: Wallet, roles: ["OWNER", "MANAGER", "CASHIER", "WAITER"] },
   { href: "/dashboard", labelKey: "dashboard", icon: LineChart, roles: ["OWNER", "MANAGER"] },
   { href: "/menu", labelKey: "menu", icon: BookOpenText, roles: ["OWNER", "MANAGER"] },
   { href: "/inventory", labelKey: "inventory", icon: Boxes, roles: ["OWNER", "MANAGER"] },

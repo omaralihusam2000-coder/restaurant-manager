@@ -9,6 +9,7 @@ const itemSchema = z.object({
   nameAr: z.string().min(1).max(120),
   nameEn: z.string().min(1).max(120),
   unit: z.string().min(1).max(30),
+  unitEn: z.string().min(1).max(30),
   quantity: z.number().min(0),
   lowStockAt: z.number().min(0),
 });

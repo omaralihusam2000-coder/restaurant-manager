@@ -71,6 +71,7 @@ model Restaurant {
   tables       Table[]
   orders       Order[]
   inventoryItems InventoryItem[]
+  shifts       Shift[]
 }
 
 model User {
@@ -86,6 +87,7 @@ model User {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 
   orders       Order[]
+  shifts       Shift[]
 }
 
 model Category {
@@ -253,10 +255,30 @@ model InventoryItem {
   nameAr         String
   nameEn         String
   unit           String   @default("قطعة")
+  unitEn         String   @default("pcs")
   quantity       Float    @default(0)
   lowStockAt     Float    @default(5)
   updatedAt      DateTime @updatedAt
 
   restaurantId   String
   restaurant     Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+}
+
+// A cashier's work session at the register: opened with a starting cash
+// float, closed with a physical count so any over/short is caught the same
+// day instead of showing up as a mystery in the books weeks later.
+model Shift {
+  id            String    @id @default(cuid())
+  openingCash   Float
+  closingCash   Float?
+  expectedCash  Float?
+  notes         String?
+  openedAt      DateTime  @default(now())
+  closedAt      DateTime?
+
+  restaurantId  String
+  restaurant    Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
 }

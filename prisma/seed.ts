@@ -201,11 +201,11 @@ async function main() {
 
   await db.inventoryItem.createMany({
     data: [
-      { nameAr: "أرز بسمتي", nameEn: "Basmati Rice", unit: "كجم", quantity: 40, lowStockAt: 10, restaurantId: restaurant.id },
-      { nameAr: "دجاج", nameEn: "Chicken", unit: "كجم", quantity: 25, lowStockAt: 8, restaurantId: restaurant.id },
-      { nameAr: "لحم غنم", nameEn: "Lamb", unit: "كجم", quantity: 6, lowStockAt: 8, restaurantId: restaurant.id },
-      { nameAr: "خبز", nameEn: "Bread", unit: "ربطة", quantity: 3, lowStockAt: 5, restaurantId: restaurant.id },
-      { nameAr: "طماطم", nameEn: "Tomatoes", unit: "كجم", quantity: 15, lowStockAt: 5, restaurantId: restaurant.id },
+      { nameAr: "أرز بسمتي", nameEn: "Basmati Rice", unit: "كجم", unitEn: "kg", quantity: 40, lowStockAt: 10, restaurantId: restaurant.id },
+      { nameAr: "دجاج", nameEn: "Chicken", unit: "كجم", unitEn: "kg", quantity: 25, lowStockAt: 8, restaurantId: restaurant.id },
+      { nameAr: "لحم غنم", nameEn: "Lamb", unit: "كجم", unitEn: "kg", quantity: 6, lowStockAt: 8, restaurantId: restaurant.id },
+      { nameAr: "خبز", nameEn: "Bread", unit: "ربطة", unitEn: "pack", quantity: 3, lowStockAt: 5, restaurantId: restaurant.id },
+      { nameAr: "طماطم", nameEn: "Tomatoes", unit: "كجم", unitEn: "kg", quantity: 15, lowStockAt: 5, restaurantId: restaurant.id },
     ],
   });
 

@@ -105,7 +105,7 @@ export default async function DashboardPage() {
                     {locale === "ar" ? item.nameAr : item.nameEn}
                   </span>
                   <Badge tone="danger">
-                    {item.quantity} {item.unit}
+                    {item.quantity} {locale === "ar" ? item.unit : item.unitEn}
                   </Badge>
                 </div>
               ))

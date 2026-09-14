@@ -22,7 +22,7 @@ type Items = Awaited<ReturnType<typeof getInventoryForRestaurant>>;
 function AddInventoryDialog({ onClose, onSaved }: { onClose: () => void; onSaved: () => void }) {
   const { dict } = useI18n();
   const { toast } = useToast();
-  const [form, setForm] = React.useState({ nameAr: "", nameEn: "", unit: "", quantity: "0", lowStockAt: "5" });
+  const [form, setForm] = React.useState({ nameAr: "", nameEn: "", unit: "", unitEn: "", quantity: "0", lowStockAt: "5" });
   const [saving, setSaving] = React.useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -32,6 +32,7 @@ function AddInventoryDialog({ onClose, onSaved }: { onClose: () => void; onSaved
       nameAr: form.nameAr,
       nameEn: form.nameEn,
       unit: form.unit,
+      unitEn: form.unitEn,
       quantity: Number(form.quantity) || 0,
       lowStockAt: Number(form.lowStockAt) || 0,
     });
@@ -53,9 +54,14 @@ function AddInventoryDialog({ onClose, onSaved }: { onClose: () => void; onSaved
         <Field label={dict.menu.itemNameEn}>
           <Input value={form.nameEn} onChange={(e) => setForm((f) => ({ ...f, nameEn: e.target.value }))} required dir="ltr" />
         </Field>
-        <Field label={dict.inventory.unit}>
-          <Input value={form.unit} onChange={(e) => setForm((f) => ({ ...f, unit: e.target.value }))} required />
-        </Field>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label={`${dict.inventory.unit} (AR)`}>
+            <Input value={form.unit} onChange={(e) => setForm((f) => ({ ...f, unit: e.target.value }))} required dir="rtl" />
+          </Field>
+          <Field label={`${dict.inventory.unit} (EN)`}>
+            <Input value={form.unitEn} onChange={(e) => setForm((f) => ({ ...f, unitEn: e.target.value }))} required dir="ltr" />
+          </Field>
+        </div>
         <div className="grid grid-cols-2 gap-3">
           <Field label={dict.inventory.quantity}>
             <Input type="number" min={0} value={form.quantity} onChange={(e) => setForm((f) => ({ ...f, quantity: e.target.value }))} />
@@ -118,7 +124,7 @@ export function InventoryClient({ items }: { items: Items }) {
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold">{locale === "ar" ? item.nameAr : item.nameEn}</p>
                 <p className="text-xs text-text-muted">
-                  {dict.inventory.unit}: {item.unit} · {dict.inventory.lowStockAt}: {item.lowStockAt}
+                  {dict.inventory.unit}: {locale === "ar" ? item.unit : item.unitEn} · {dict.inventory.lowStockAt}: {item.lowStockAt}
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">

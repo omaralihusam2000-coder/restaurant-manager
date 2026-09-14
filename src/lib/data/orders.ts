@@ -21,7 +21,12 @@ export type OrderStatusFilter = OrderStatus | "ALL" | "ACTIVE";
 // IN_KITCHEN/READY/SERVED while still awaiting payment.
 const ACTIVE_STATUSES: OrderStatus[] = ["OPEN", "IN_KITCHEN", "READY", "SERVED"];
 
-export async function getOrders(restaurantId: string, filter?: { status?: OrderStatusFilter }) {
+const ORDERS_PAGE_SIZE = 25;
+
+export async function getOrders(
+  restaurantId: string,
+  filter?: { status?: OrderStatusFilter; page?: number }
+) {
   const status = filter?.status;
   const where =
     status === "ACTIVE"
@@ -29,12 +34,20 @@ export async function getOrders(restaurantId: string, filter?: { status?: OrderS
       : status && status !== "ALL"
         ? { status }
         : {};
-  return db.order.findMany({
-    where: { restaurantId, ...where },
-    orderBy: { createdAt: "desc" },
-    take: 200,
-    include: orderInclude,
-  });
+  const page = Math.max(1, filter?.page ?? 1);
+
+  const [orders, total] = await Promise.all([
+    db.order.findMany({
+      where: { restaurantId, ...where },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * ORDERS_PAGE_SIZE,
+      take: ORDERS_PAGE_SIZE,
+      include: orderInclude,
+    }),
+    db.order.count({ where: { restaurantId, ...where } }),
+  ]);
+
+  return { orders, total, page, pageSize: ORDERS_PAGE_SIZE, pageCount: Math.max(1, Math.ceil(total / ORDERS_PAGE_SIZE)) };
 }
 
 export async function getOrderById(orderId: string, restaurantId: string) {
@@ -55,7 +68,7 @@ export async function getActiveKitchenOrders(restaurantId: string) {
   });
 }
 
-export type OrdersData = Awaited<ReturnType<typeof getOrders>>;
+export type OrdersPage = Awaited<ReturnType<typeof getOrders>>;
 export type OrderDetail = Awaited<ReturnType<typeof getOrderById>>;
 export type KitchenOrdersData = Awaited<ReturnType<typeof getActiveKitchenOrders>>;
 

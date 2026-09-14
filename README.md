@@ -22,6 +22,7 @@ SaaS** يُشترك فيه عدة مطاعم.
 </p>
 <p align="center">
   <img src="docs/screenshots/pos-mobile.png" width="30%" alt="POS on mobile" />
+  <img src="docs/screenshots/shift-close.png" width="49%" alt="Closing a cash shift with automatic over/short detection" />
 </p>
 
 ## ✨ Features
@@ -46,8 +47,15 @@ every 10s, elapsed-time urgency coloring, one-tap status flow per item
 (queued → cooking → ready → served) that automatically rolls up to the
 order's own status.
 
-**Orders (`/orders`)** — full history with status filters, per-order detail,
-cancel / continue-to-payment / print.
+**Orders (`/orders`)** — paginated history with status filters, per-order
+detail, cancel / continue-to-payment / print, and a CSV export (managers/owner)
+for accounting.
+
+**Shifts (`/shifts`)** — cash drawer accountability: a cashier opens a shift
+with a starting cash float, sells through the day, then closes it against a
+physical count; the system computes the expected cash from that shift's cash
+payments and flags any over/short automatically. Managers see every
+cashier's shift history.
 
 **Menu management (`/menu`)** — categories and items CRUD, prices & cost
 (for profit tracking), availability toggle, reusable modifier groups.
@@ -117,7 +125,7 @@ src/
   app/
     login/                public login page
     (app)/                authenticated shell (sidebar/topbar) + all screens:
-      pos/ tables/ kitchen/ orders/ menu/ dashboard/ inventory/ settings/
+      pos/ tables/ kitchen/ orders/ menu/ dashboard/ inventory/ settings/ shifts/
     receipt/[id]/         standalone print-friendly receipt (no app chrome)
     api/kitchen/active/   polling endpoint for the kitchen display
   components/             ui/ (primitives), layout/, pos/, tables/, kitchen/,
@@ -164,9 +172,7 @@ subscription product mainly means:
 
 ## 🗺️ Known limitations (good next steps)
 
-- Order history has no pagination yet (fine for a single restaurant's
-  volume, worth adding before real multi-month usage).
 - Inventory isn't automatically decremented by sales (it's a manual stock
   log today, not a full recipe/BOM system).
-- `InventoryItem.unit` is a single free-text field, not localized like menu
-  item names are.
+- Shifts are tracked per cashier, not per till/terminal — fine for one
+  register, worth revisiting for a multi-register floor.
